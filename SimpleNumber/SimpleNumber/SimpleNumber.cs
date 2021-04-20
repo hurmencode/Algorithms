@@ -6,15 +6,29 @@ namespace Lesson_1
     {
         static void Main(string[] args)
         {
-            simple(1);
-            simple(3);
-            simple(6);
+            var testCase = new TestCase()
+            {
+                X = 1,
+                Expected = true,
+                ExceptionExpected = null
+            };
+
+            var testCase1 = new TestCase()
+            {
+                X = 10,
+                Expected = true,
+                ExceptionExpected = null
+            };
+
+            SimpleTest(testCase);
+            SimpleTest(testCase1);
         }
 
-        static void simple(int number)
+        static bool simple(int number)
         {
             int d = 0;
             int i = 2;
+            bool result = true;
 
             while (i < number)
             {
@@ -28,16 +42,48 @@ namespace Lesson_1
 
             if (d == 0)
             {
-                Console.WriteLine("Простое");
+                return result;
             }
             else
             {
-                Console.WriteLine("Не простое");
+                return result = false;
             }
             
         }
 
-       
+        public class TestCase
+        {
+            public int X { get; set; }
+            public bool Expected { get; set; }
+            public Exception ExceptionExpected { get; set; }
+        }
+
+        static void SimpleTest(TestCase testCase)
+        {
+            try
+            {
+                var actual = simple(testCase.X);
+                if (actual == testCase.Expected)
+                {
+                    Console.WriteLine("VALID TEST");
+                }
+                else
+                {
+                    Console.WriteLine("INVALID TEST");
+                }
+            }
+            catch (Exception ex)
+            {
+                if (testCase.ExceptionExpected != null)
+                {
+                    Console.WriteLine("VALID TEST");
+                }
+                else
+                {
+                    Console.WriteLine("INVALID TEST");
+                }
+            }
+        }
     }
 
 }
