@@ -36,11 +36,25 @@ namespace Lesson_2
 
         public void AddNodeAfter(Node node, int value)
         {
-            Node newNode = new Node { Value = value };
+            
             if (node == FirstNode)
             {
-                
+                Node newNode = new Node { Value = value };
+                var currentNode = newNode;
+
+                newNode.NextNode = LostNode;
+                LostNode.PrevNode = newNode;
+                newNode.PrevNode = FirstNode;
+                FirstNode.NextNode = node;
+                currentNode.PrevNode = FirstNode;
+                currentNode.NextNode = LostNode;
+                Size++;
             }
+            else if (node == LostNode)
+            {
+                AddNode(value);
+            }
+            
         }
 
         public void RemoveNode(int index)
@@ -50,7 +64,24 @@ namespace Lesson_2
 
         public void RemoveNode(Node node)
         {
-
+            if (node == FirstNode)
+            {
+                FirstNode = node.NextNode;
+                node.NextNode = null;
+                FirstNode.PrevNode = null;
+            }
+            else if (node == LostNode)
+            {
+                LostNode = node.PrevNode;
+                node.PrevNode = null;
+                LostNode.NextNode = null;
+            }
+            else
+            {
+                node.NextNode.PrevNode = node.PrevNode;
+                node.PrevNode.NextNode = node.NextNode;
+            }
+            Size--;
         }
 
         public Node FindNode(int searchNode)
