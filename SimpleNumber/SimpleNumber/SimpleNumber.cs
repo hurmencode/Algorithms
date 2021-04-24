@@ -13,7 +13,7 @@ namespace Lesson_1
                 ExceptionExpected = null
             };
 
-            var testCase1 = new TestCase()
+            var BadTestCase1 = new TestCase()
             {
                 X = 10,
                 Expected = true,
@@ -21,7 +21,7 @@ namespace Lesson_1
             };
 
             SimpleTest(testCase);
-            SimpleTest(testCase1);
+            SimpleTest(BadTestCase1);
         }
 
         static bool simple(int number)
@@ -44,10 +44,8 @@ namespace Lesson_1
             {
                 return result;
             }
-            else
-            {
-                return result = false;
-            }
+            return result = false;
+            
             
         }
 
