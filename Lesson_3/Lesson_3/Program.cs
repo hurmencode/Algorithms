@@ -1,10 +1,11 @@
-﻿using System;
-using BenchmarkDotNet.Running;
+using System;
 using BenchmarkDotNet.Attributes;
+using BenchmarkDotNet.Running;
+
 
 namespace Lesson_3
 {
-    class Program
+    public class Program
     {
         private static int size = 500;
         static Random random = new Random();
@@ -51,7 +52,35 @@ namespace Lesson_3
         }
         static void Main(string[] args)
         {
+            CreatArray();
             BenchmarkSwitcher.FromAssembly(typeof(Program).Assembly).Run(args);
+        }
+
+        public class BechTest
+        {
+            [Benchmark]
+            public void TestDistClass()
+            {
+                BechmarkClass.DistClass(ArrayPointClass, ArrayPointClass);
+            }
+
+            [Benchmark]
+            public void TestDistStuctFl()
+            {
+                BechmarkClass.DistStructFl(ArrayPointStructFl, ArrayPointStructFl);
+            }
+
+            [Benchmark]
+            public void TestDistStructDl()
+            {
+                BechmarkClass.DistStructDl(ArrayPointStructDbl, ArrayPointStructDbl);
+            }
+
+            [Benchmark]
+            public void TestDistStructFlNoSqrt()
+            {
+                BechmarkClass.DistStructFlNoSqrt(ArrayPointStructFl, ArrayPointStructFl);
+            }
         }
     }
 }
